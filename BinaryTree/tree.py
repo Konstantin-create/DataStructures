@@ -4,6 +4,7 @@ class BinaryTree:
         self.root = Node(index=0)
 
     def append(self, index: int):
+        """Function to append digit to tree"""
         current_node = self.root
         while True:
             if current_node.index == index:
@@ -17,6 +18,18 @@ class BinaryTree:
                 if current_node.right is None:
                     current_node.right = Node(index=index)
                     return
+                current_node = current_node.right
+
+    def find(self, index):
+        current_node = self.root
+        while True:
+            if current_node is None:
+                raise IndexError(f'No such index {index}')
+            if current_node.index == index:
+                return current_node
+            elif index < current_node.index:
+                current_node = current_node.left
+            elif index > current_node.index:
                 current_node = current_node.right
 
     def __repr__(self):
