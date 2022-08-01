@@ -1,42 +1,32 @@
-from pympler import asizeof
-
-
-# Binary tree on tuple
-class BinaryTree_on_tuples:
-    __slots__ = ('tree')
+class BinaryTree:
     def __init__(self):
-        self.tree = ()
+        self.root = Node(index=0)
 
-    def append(self, key: int, data: any):
-        if len(self.tree) == 0:
-            self.tree = (key, data, None, None)
-        else:
-            pass # Append elements
+    def append(self, data):
+        if self.root.data == None:
+            self.root.data = data
+            return self.root.index
 
-    def _tmp_rec_check_index(self, tuple_to_check: tuple, index: int):
-        if tuple_to_check[0] == index:
-            return (tuple_to_check[0], tuple_to_check[1])
-        if index > tuple_to_check[0]:
-            return tuple_to_check[3]
-        if index < tuple_to_check[0]:
-            return tuple_to_check[2]
-
-    def get_item(self, index: int): 
-        tmp_tree = self.tree
+        current_node = self.root
         while True:
-            responce = self._tmp_rec_check_index(tmp_tree, index)
-            if not responce:
-                raise IndexError(f'No such index {index}')
-            elif len(responce) == 2:
-                return responce[1]
-            elif len(responce) == 4:
-                tmp_tree = responce
- 
+            if current_node.left == None:
+                current_node.left = Node(index=current_node.index - 1, data=data)
+                return current_node.left.index
+            elif current_node.right == None:
+                current_node.right = Node(index=current_node.index + 1, data=data)
+                return current_node.right.index
+            else:
+                current_node = current_node.left
 
+class Node:
+    def __init__(self, index=None, data=None, left=None, right=None):
+        self.index = index
+        self.data = data
+        self.left = left
+        self.right = right
 
-tree = BinaryTree_on_tuples()
-tree.tree = (12, 'root', (11, 'node1', (10, 'leave1', None, None), None), (15, 'node2', None, None))
+    def set_left(data):
+        self.left = Node(index=self.index - 1, data=data)
 
-print(tree.get_item(10))
-print(asizeof.asizeof(tree))
-
+    def set_right(data):
+        self.right = Node(index=self.index + 1, data=data)
