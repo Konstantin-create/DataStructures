@@ -1,7 +1,7 @@
 class Stack:
     __slots__ = ('stack')
-    def __init__(self):
-        self.stack = []
+    def __init__(self, stack=[]):
+        self.stack = stack
 
     def push(self, item):
         """Function to add element to stack"""
@@ -13,5 +13,31 @@ class Stack:
             return None
         return self.stack.pop()
 
+    def __iadd__(self, other):
+        """Function to add element to Stack and save it in self.stack"""
+        try:
+            if type(other) == list:
+                self.push(other)
+                return self
+            self.stack += other.stack
+            return self
+        except AttributeError:
+            self.push(other)
+            return self
+
+    def __add__(self, other):
+        """Function to add element to Stack"""
+        try:
+            if type(other) == list:
+                return Stack(self.stack + other)
+            return Stack(self.stack + other.stack)
+        except AttributeError:
+            return Stack(self.stack+[].append(other))
+    
+    def __len__(self):
+        """Function to get item lenght"""
+        return len(self.stack)
+
     def __repr__(self):
-        return f'Stack{self.stack}'
+        """Function to return item"""
+        return f'Stack({self.stack})'
