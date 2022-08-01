@@ -1,32 +1,33 @@
+# Only for digits
 class BinaryTree:
     def __init__(self):
         self.root = Node(index=0)
 
-    def append(self, data):
-        if self.root.data == None:
-            self.root.data = data
-            return self.root.index
-
+    def append(self, index: int):
         current_node = self.root
         while True:
-            if current_node.left == None:
-                current_node.left = Node(index=current_node.index - 1, data=data)
-                return current_node.left.index
-            elif current_node.right == None:
-                current_node.right = Node(index=current_node.index + 1, data=data)
-                return current_node.right.index
-            else:
+            if current_node.index == index:
+                raise TypeError(f'Your index is not unic')
+            if index < current_node.index:
+                if current_node.left is None:
+                    current_node.left = Node(index=index)
+                    return
                 current_node = current_node.left
+            elif index > current_node.index:
+                if current_node.right is None:
+                    current_node.right = Node(index=index)
+                    return
+                current_node = current_node.right
+
+    def __repr__(self):
+        return f'{self.root}'
+
 
 class Node:
-    def __init__(self, index=None, data=None, left=None, right=None):
+    def __init__(self, index=None, left=None, right=None):
         self.index = index
-        self.data = data
         self.left = left
         self.right = right
 
-    def set_left(data):
-        self.left = Node(index=self.index - 1, data=data)
-
-    def set_right(data):
-        self.right = Node(index=self.index + 1, data=data)
+    def __repr__(self):
+        return f'({self.index}, {self.left}, {self.right})'
