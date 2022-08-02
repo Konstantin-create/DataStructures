@@ -1,7 +1,7 @@
 class Stack:
     __slots__ = ('stack')
     def __init__(self, stack=[]):
-        self.stack = stack
+        self.stack = list(stack)
 
     def push(self, item):
         """Function to add element to stack"""
@@ -32,7 +32,7 @@ class Stack:
                 return Stack(self.stack + other)
             return Stack(self.stack + other.stack)
         except AttributeError:
-            return Stack(self.stack+[].append(other))
+            return Stack(self.stack+ list(other))
     
     def __len__(self):
         """Function to get item lenght"""
