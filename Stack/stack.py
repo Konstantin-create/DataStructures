@@ -8,10 +8,20 @@ class Stack:
         self.stack.append(item)
 
     def pop(self):
-        """Function to get element from stack"""
-        if len(self.stack) == 0:
+        """Function to get top element from stack and remove it"""
+        if self.isEmpty():
             return None
         return self.stack.pop()
+    
+    def isEmpty(self):
+        """Function to check is file empty"""
+        return len(self.stack) == 0
+
+    def top(self):
+        """Function to get top element from stack without remove it"""
+        if self.isEmpty():
+            return None
+        return self.stack[-1]
 
     def __iadd__(self, other):
         """Function to add element to Stack and save it in self.stack"""
