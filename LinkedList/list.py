@@ -5,6 +5,9 @@ class LinkedList:
 
     def insert(self, data=None):
         """Function to insert item to the end of linked list"""
+        if self.head.data == None:
+            self.head.data = data
+            return
         current_node = self.head
         while True:
             if current_node.next is None:
@@ -14,9 +17,12 @@ class LinkedList:
 
     def insert_head(self, data=None):
         """Function to insert item to the head of linked list"""
+        if self.head.data == None:
+            self.head.data = _Node(data=data, next_item=self.head.next)
+            return
         self.head = _Node(data=data, next_item=self.head)
 
-    def delete(self, data):
+    def pop_data(self, data):
         """Function to delete element by data"""
         current_node = self.head
         previos_node = current_node
@@ -32,13 +38,13 @@ class LinkedList:
             if current_node.next:
                 self.head = current_node.next
                 return -1
-            raise KeyError('You cant remove the last node!')
+            self.head = _Node()
         if not current_node.next:
             previos_node.next = None
         else:
             previos_node.next = current_node.next
 
-    def delete_end(self):
+    def pop_end(self):
         """Function to delete element in the end of linked list"""
         current_node = self.head
         previos_node = current_node
@@ -49,13 +55,14 @@ class LinkedList:
             current_node = current_node.next
 
         if current_node == previos_node:
-            raise KeyError('You cant remove the last node!')
+            self.head = _Node()
         previos_node.next = None
 
-    def delete_head(self):
+    def pop(self):
         """Function to delete element in the head of linked list"""
-        if not self.head.next:
-            raise KeyError('You cant remove the last node!')
+        if self.head.next is None:
+            self.head = _Node()
+            return
         self.head = self.head.next
 
     def find(self, data):
