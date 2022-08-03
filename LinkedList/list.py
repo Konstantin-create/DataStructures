@@ -3,7 +3,7 @@ class LinkedList:
     def __init__(self, head_data=None):
         self.head = _Node(data=head_data)
 
-    def insert(self, data=None):
+    def insert_end(self, data=None):
         """Function to insert item to the end of linked list"""
         if self.head.data == None:
             self.head.data = data
@@ -15,7 +15,7 @@ class LinkedList:
                 return
             current_node = current_node.next
 
-    def insert_head(self, data=None):
+    def insert(self, data=None):
         """Function to insert item to the head of linked list"""
         if self.head.data == None:
             self.head.data = _Node(data=data, next_item=self.head.next)
@@ -78,6 +78,24 @@ class LinkedList:
     def isEmpty(self):
         """Function to check is list empty"""
         return not self.head.next
+
+
+    def __iadd__(self, other):
+        """Function to add element to queue and asign a value to queue. Return self"""
+        try:
+            current_other_node = other.head
+            while True:
+                self.insert(current_other_node.data)
+                if not current_other_node.next:
+                    return self
+                current_other_node = current_other_node.next
+        except AttributeError:
+            if type(other) is list:
+                for element in other:
+                    self.insert(element)
+                return self
+            self.insert(other)
+            return self
 
     def __repr__(self):
         """Function to print self"""
