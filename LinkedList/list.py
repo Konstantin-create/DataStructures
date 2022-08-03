@@ -94,6 +94,12 @@ class LinkedList:
         for item in current_list:
             self.insert(item)
 
+    def remove_dublicates(self) -> None:
+        """Function to remove dublicates from linked list"""
+        current_list = list(set(self.__iter__()))
+        self.head = _Node()
+        for item in current_list:
+            self.insert(item)
 
     def __iadd__(self, other) -> object:
         """Function to add element to queue and asign a value to queue. Return self"""
