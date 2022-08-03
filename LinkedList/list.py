@@ -31,7 +31,7 @@ class LinkedList:
         if current_node == previos_node:
             if current_node.next:
                 self.head = current_node.next
-                return
+                return -1
             raise KeyError('You cant remove the last node!')
         if not current_node.next:
             previos_node.next = None
@@ -59,18 +59,29 @@ class LinkedList:
         self.head = self.head.next
 
     def find(self, data):
+        """Function to find element by data. Return element and next items"""
         current_node = self.head
         while True:
-            if current_node.data = data:
+            if current_node.data == data:
                 return current_node
             if not current_node.next:
                 return None
             current_node = current_node.next
 
+    def isEmpty(self):
+        """Function to check is list empty"""
+        return not self.head.next
 
     def __repr__(self):
         """Function to print self"""
-        return f'LinkedList({self.head})'
+        output = []
+        current_node = self.head
+        while True:
+            output.append(current_node.data)
+            if current_node.next == None:
+                break
+            current_node = current_node.next
+        return f'LinkedList({output})'
 
 class _Node:
     __slots__ = ('data', 'next')
