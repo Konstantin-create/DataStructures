@@ -87,6 +87,13 @@ class LinkedList:
         return not self.head.next
 
 
+    def reverse(self) -> None:
+        current_list = self.__iter__()
+        self.head = _Node()
+        for item in current_list:
+            self.insert(item)
+
+
     def __iadd__(self, other) -> object:
         """Function to add element to queue and asign a value to queue. Return self"""
         try:
@@ -155,6 +162,10 @@ class LinkedList:
             if not current_node.next:
                 return False
             current_node = current_node.next
+
+    def __reversed__(self):
+        """Magic method for self.reversed function"""
+        self.reverse()
     
 
     def __repr__(self):
