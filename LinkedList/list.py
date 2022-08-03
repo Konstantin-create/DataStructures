@@ -88,6 +88,7 @@ class LinkedList:
 
 
     def reverse(self) -> None:
+        """Function to reverse linked list"""
         current_list = self.__iter__()
         self.head = _Node()
         for item in current_list:
@@ -164,9 +165,13 @@ class LinkedList:
             current_node = current_node.next
 
     def __reversed__(self):
-        """Magic method for self.reversed function"""
-        self.reverse()
-    
+        """Function to return reversed list without saving"""
+        tmp_list = LinkedList()
+        current_list = self.__iter__()
+        for item in current_list:
+            tmp_list.insert(item)
+        return tmp_list
+         
 
     def __repr__(self):
         """Function to print self"""
